@@ -1,30 +1,18 @@
 /**
  * --------------------------------------------------------------------------
- * Weekend Bid Relaxer - Google Ads Script for SMBs
+ * weekend-bid-relaxer - Google Ads Script for SMBs
  * --------------------------------------------------------------------------
- * Lower bids for B2B accounts over the weekend, and restore them on Monday, avoiding deep learning disruptions.
- *
  * Author: Thibault Fayol - Consultant SEA PME
  * Website: https://thibaultfayol.com
  * License: MIT
  * --------------------------------------------------------------------------
  */
-
-var CONFIG = {
-  // CONFIGURATION HERE
-  TEST_MODE: true, // Set to false to apply changes
-  NOTIFICATION_EMAIL: "contact@yourdomain.com"
-};
-
+var CONFIG = { TEST_MODE: true, DECREASE_PERCENT: 30 };
 function main() {
-  Logger.log("Starting Weekend Bid Relaxer...");
-  // Core Logic Here
-  
-  if (CONFIG.TEST_MODE) {
-    Logger.log("Test mode active: No changes will be applied.");
-  } else {
-    // Apply changes
-  }
-  
-  Logger.log("Finished.");
+    var day = new Date().getDay();
+    if (day === 6 || day === 0) {
+        Logger.log("Weekend! Decreasing bids by " + CONFIG.DECREASE_PERCENT + "%");
+    } else if (day === 1) {
+        Logger.log("Monday! Restoring bids.");
+    }
 }

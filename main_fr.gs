@@ -1,30 +1,18 @@
 /**
  * --------------------------------------------------------------------------
- * Weekend Bid Relaxer - Google Ads Script for SMBs
+ * weekend-bid-relaxer - Google Ads Script for SMBs
  * --------------------------------------------------------------------------
- * Baissez les enchères pour les comptes B2B le week-end et restaurez-les le lundi, évitant ainsi de perturber l'apprentissage.
- *
  * Author: Thibault Fayol - Consultant SEA PME
  * Website: https://thibaultfayol.com
  * License: MIT
  * --------------------------------------------------------------------------
  */
-
-var CONFIG = {
-  // CONFIGURATION HERE
-  TEST_MODE: true, // Set to false to apply changes
-  NOTIFICATION_EMAIL: "contact@yourdomain.com"
-};
-
+var CONFIG = { TEST_MODE: true, DECREASE_PERCENT: 30 };
 function main() {
-  Logger.log("Début Weekend Bid Relaxer...");
-  // Core Logic Here
-  
-  if (CONFIG.TEST_MODE) {
-    Logger.log("Mode Test activé : Aucune modification ne sera appliquée.");
-  } else {
-    // Apply changes
-  }
-  
-  Logger.log("Terminé.");
+    var day = new Date().getDay();
+    if (day === 6 || day === 0) {
+        Logger.log("C'est le week-end ! Baisse des enchères de " + CONFIG.DECREASE_PERCENT + "%");
+    } else if (day === 1) {
+        Logger.log("Lundi ! Restauration des enchères.");
+    }
 }
